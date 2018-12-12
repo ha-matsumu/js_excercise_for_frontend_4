@@ -9,14 +9,13 @@
   //   - Todoリストを一覧表示するul要素
   const inputTodoBox = document.getElementById("input-todo-box");
   const addButton = document.getElementById("add-button");
-  const ultoList = document.getElementById("todo-list");
+  const ulTodoList = document.getElementById("todo-list");
 
   //「追加」ボタンがクリックされたときの処理を実装する
   //   - テキストボックスに入力されたテキストをTodoリスト一覧に追加する
   //   - テキストボックスの中を空にする
   addButton.addEventListener("click", () => {
     todos.push(inputTodoBox.value);
-    console.log(todos);
     showTodos();
     inputTodoBox.value = "";
   });
@@ -27,26 +26,24 @@
   //    - li要素内に削除ボタンを配置して、削除ボタンをクリックしたら対応するタスクを削除する
   function showTodos() {
     // 全削除
-    while(ultoList.firstChild) {
-        ultoList.removeChild(ultoList.firstChild);
+    while(ulTodoList.firstChild) {
+        ulTodoList.removeChild(ulTodoList.firstChild);
     }
 
-    todos.forEach((element, index) => {
+    todos.forEach((todo, index) => {
         // todosの内容表示
         const liElement = document.createElement("li");
-        liElement.textContent = todos[index];
+        liElement.textContent = todo;
     
         // 削除ボタン
         const deleteButton = document.createElement("button");
         deleteButton.innerHTML = "削除";
         deleteButton.addEventListener("click", () => {
             deleteTodo(index);
-            deleteButton.parentNode.removeChild(deleteButton);
         })
     
         liElement.appendChild(deleteButton);
-        ultoList.appendChild(liElement);
-        console.log(deleteButton);
+        ulTodoList.appendChild(liElement);
     });
   }
 
